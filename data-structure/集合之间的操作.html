@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集合之间的操作</title>
+    <script src="./Set.js"></script>
+</head>
+
+<body>
+    <script>
+        let setA = new Set();
+        setA.add(123);
+        setA.add(15);
+        setA.add(17);
+        setA.add(18);
+        console.log(setA.values())
+        let setB = new Set();
+        setB.add(7);
+        setB.add(15);
+        setB.add(18);
+        setB.add(9);
+        setB.add(13);
+        console.log(setB.values())
+            // 并集
+            // setA.union(setB);
+        console.log('   setA.union(setB);: ', setA.union(setB).values());
+        // setA.interSection(setB)
+        console.log('setA.interSection(setB): ', setA.interSection(setB).values());
+        // setA.difference(setB);
+        console.log('setA.difference(setB): ', setA.difference(setB));
+        // setB.difference(setA);
+        console.log('setB.difference(setA: ', setB.difference(setA));
+        // setA.subset(setB);
+        console.log('setA.subset(setB): ', setA.subset(setB));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // // 高效率方式
+        function Prime(number) {
+            console.time()
+                // let num = parseInt(Math.sqrt(number));
+            let num = Math.floor(Math.sqrt(number))
+            for (let i = 2; i <= num; i++) {
+                if (number % i == 0) { //取余数判断是否为0
+                    return false;
+                }
+
+            }
+            console.timeEnd()
+            return true;
+        }
+        // 低效率方式
+        function isPrime(number) {
+            console.time()
+            for (let i = 2; i < number; i++) {
+                if (number % i === 0) {
+                    return false;
+                }
+            }
+            console.timeEnd()
+            return true;
+        }
+
+        // console.log(' Prime(15): ', Prime(15));
+
+        // console.log('Prime(2): ', Prime(2));
+        // console.log(Prime(2))
+        console.log(Prime(15))
+        console.log('Prime(99991): ', Prime(99991));
+        console.log('Prime(99991): ', isPrime(99991));
+
+        // console.log('Prime(13): ', Prime(13));
+    </script>
+</body>
+
+</html>

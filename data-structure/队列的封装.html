@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>队列的封装(queue)</title>
+</head>
+<body>
+    
+</body>
+<script>
+// 队列的封装
+function Queue(){
+    // 定义一个队列属性
+    this.items=[];
+    // 实现队列的方法
+    // 1、将元素加入队列
+    Queue.prototype.enqueue=function(element){
+        this.items.push(element);
+    }
+    // 2、从队列中删除前端元素,并返回该元素
+    Queue.prototype.dequeue=function(){
+        return this.items.shift();
+    }
+    // 3、查看前端元素
+    Queue.prototype.front=function(){
+        return this.items[0];
+    }
+    // 4、查看队列是否为空,是则返回true，否则为false
+    Queue.prototype.isEmpty=function(){
+        return this.items.length===0;
+    }
+    // 5、查看队列中元素个数
+    Queue.prototype.size=function(){
+        return this.items.length;
+    }
+    // 6、将队列内容以字符串方式返回
+    Queue.prototype.toString=function(){
+        let queueString="";
+        for(let i=0;i<this.items.length;i++){
+            queueString+=this.items[i];
+        }
+        return queueString;
+    }
+}
+//  let queue=new Queue();
+//  queue.enqueue(10);
+//  queue.enqueue(15);
+//  queue.enqueue(20);
+//  queue.enqueue(25);
+// console.log(queue); 
+//  console.log(queue.dequeue());
+// console.log(queue.isEmpty());
+// console.log(queue.front());
+// console.log(queue.size());
+// console.log(queue.toString());
+
+    //面试题：击鼓传花
+    // 定义解题方法，nameList为一群人的信息，num为数的数字
+    function game(nameList,num){
+        // 1、创建一个队列结构
+        let manQueue=new Queue();
+// 2、初始化队列，将所有人加入队列
+for(let i=0;i<nameList.length;i++){
+    manQueue.enqueue(nameList[i]);
+}
+// 3、开始数数字
+while(manQueue.size()>1){
+    // 不是num的时候，重新加入到队列的列尾
+    // 当某人数到num的时候，则将其从队列中删除
+    // 3.1num数字之前的重新加入到队列的末尾
+    
+    for(let i=0;i<num-1;i++){
+        manQueue.enqueue(manQueue.dequeue())
+    }
+    // 3.2num所对应的这个人，直接从队列中删除
+    manQueue.dequeue();
+}
+// 4、获取最后剩下的那个人
+let endName=manQueue.front();
+console.log("剩下的那个人是："+endName);
+return nameList.indexOf(endName);//查询最后那个人在原来的列表中的位置
+    } 
+    let names=["李白","杜甫","王维","杜牧","曾国藩","陆游"];
+    console.log("最后那个人所在原数组的位置是："+game(names,4));
+
+</script>
+</html>

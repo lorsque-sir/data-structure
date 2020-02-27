@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function Stack() {
+        // let items=[];
+        this.items = []; //这样才能被下面的方法调用
+        //Stack的方法
+        // 想这种方式不好，这是给某一个对象实例添加了方法
+        // this.pushs=function(element){
+        //     this.items.push(element);
+        // }
+        // 这种方式是给整个类添加方法
+        Stack.prototype.pushs = function(element) {
+            this.items.push(element);
+        }
+
+    }
+    let s = new Stack();
+    s.pushs(10);
+    console.log(s.items)
+</script>
+
+</html>

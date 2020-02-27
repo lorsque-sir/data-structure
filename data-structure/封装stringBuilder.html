@@ -1,0 +1,36 @@
+<!-- 实现字符串的拼接 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        function StringBuilder() {
+            console.log(this);
+            this._stringArray = new Array();
+        }
+        StringBuilder.prototype.append = function(str) {
+            // 存入数组
+            this._stringArray.push(str);
+        }
+        StringBuilder.prototype.toString = function(joinGap) {
+            // 将数组转换为字符串
+            return this._stringArray.join(joinGap);
+        }
+
+        //调用方法实现字符串拼接             
+        var stringBuilder = new StringBuilder();
+        stringBuilder.append("good");
+        stringBuilder.append("morning");
+
+        alert(stringBuilder.toString(" "));
+    </script>
+</body>
+
+</html>

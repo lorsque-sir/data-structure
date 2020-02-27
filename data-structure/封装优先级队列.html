@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装优先级队列</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 封装优先级队列
+    function PriorityQueue() {
+        // 封装一个内部类，保存队列的元素以及其优先级
+        function queueElement(element, priority) {
+            this.element = element;
+            this.priority = priority;
+        }
+        // 封装属性
+        this.items = [];
+        // 实现插入方法
+        PriorityQueue.prototype.enqueue = function(element, priority) {
+                //1、 创建一个queueElement对象实例
+                let queueElem = new queueElement(element, priority);
+                // 2、判断队列是都为空，则直接将元素加入队列
+                if (this.items.length === 0) {
+                    this.items.push(queueElem);
+                } else {
+                    // 如果队列不为空，则需要一一比较元素的优先级，如果优先级比他们高，则插入当前位置
+                    let added = false;
+                    for (let i = 0; i < this.items.length; i++) {
+                        if (queueElem.priority < this.items[i].priority) {
+                            this.items.splice(i, 0, queueElem); //在i这个位置插入一个元素
+                            added = true;
+                            break;
+                        }
+                    }
+                    // 如果元素的优先级最低，则排在最后，加在队列之后
+                    if (!added) {
+                        this.items.push(queueElem)
+                    }
+                }
+            }
+            // 下面的方法与普通队列的方法是一样的
+            // 2、从队列中删除前端元素,并返回该元素
+        PriorityQueue.prototype.dequeue = function() {
+                return this.items.shift();
+            }
+            // 3、查看前端元素
+        PriorityQueue.prototype.front = function() {
+                return this.items[0];
+            }
+            // 4、查看队列是否为空,是则返回true，否则为false
+        PriorityQueue.prototype.isEmpty = function() {
+                return this.items.length === 0;
+            }
+            // 5、查看队列中元素个数
+        PriorityQueue.prototype.size = function() {
+                return this.items.length;
+            }
+            // 6、将队列内容以字符串方式返回
+        PriorityQueue.prototype.toString = function() {
+            let queueString = "";
+            for (let i = 0; i < this.items.length; i++) {
+                queueString += this.items[i].element + "-" + this.items[i].priority;
+            }
+            // console.log(queueString)
+            return queueString;
+        }
+
+
+    }
+    let pq = new PriorityQueue();
+    pq.enqueue("李白", 111);
+    pq.enqueue("杜甫", 200);
+    pq.enqueue("李煜", 150);
+    pq.enqueue("杜牧", 50);
+    console.log(pq);
+    console.log(pq.toString());
+</script>
+
+</html>

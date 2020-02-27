@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栈的封装</title>
+</head>
+
+<body>
+
+</body>
+<script>
+// 栈的封装
+    function Stack() {
+        //栈中属性，定义栈基本属性；
+     this.items = [];
+        // 封装方法
+        // 1、入栈操作 push()
+        // 一般不使用this.push();这是给某一个对象实例添加了方法
+        // 建议使用Stack.prototype.push()方式，这是给整个类添加了push()方法，效率更高一些
+
+    //    this.push = function(element) {
+    //             this.items.push(element);
+    //         }
+        Stack.prototype.push = function(element) {
+                this.items.push(element);
+            }
+            // 2、删除栈顶元素，并返回该元素 pop()
+        Stack.prototype.pop = function() {
+                return this.items.pop();
+            }
+            // 3、返回栈顶元素 peek()
+        Stack.prototype.peek = function() {
+                return this.items[this.items.length - 1];
+            }
+            // 4、判断栈是否为空,是返回true，否则返回false。 isEmpty()
+        Stack.prototype.isEmpty = function() {
+                return this.items.length == 0;
+            }
+            // 5、返回栈的元素个数 size() 类似于数组的判断长度
+        Stack.prototype.size = function() {
+                return this.items.length;
+            }
+            // 6、将栈内元素以字符串方式返回 toString()
+        Stack.prototype.toString = function() {
+            let resultString = "";
+            for (let i = 0; i < this.items.length; i++) {
+                resultString += this.items[i] + "";
+            }
+            return resultString;
+        }
+    }
+    // let stack = new Stack();
+    // stack.push(10);
+    // stack.push(15);
+    // stack.push(20);
+    // stack.push(25);
+    // stack.push(30);
+    // console.log(stack); //这里返回的值只有三个，并不是五个
+    // console.log(stack.items);
+    // console.log(stack.items[4]);
+    // stack.pop();
+    // console.log("1" + stack);
+    // stack.pop();
+    // console.log("2" + stack);
+    // console.log(stack.peek());
+    // console.log(stack.size());
+    // console.log(stack.isEmpty());
+    // console.log(stack.toString());
+    // 使用栈来实现十进制正整数转换为二进制
+    function decToBin(decNumber) {
+        // 用来保存传入进来的十进制数
+        let dec=decNumber;
+        // 初始化一个栈，用来储存每次取余后的0,1
+        let binStack = new Stack();
+        // 初始一个保存二进制结果的字符串
+        let binString = "";
+        while (decNumber > 0) {
+            // 获取余数并放入到栈中
+        binStack.push(decNumber % 2);
+            // 获取整除后的结果，并将该值作为下一次计算的数字
+            decNumber = Math.floor(decNumber / 2)         
+        }
+        while (!binStack.isEmpty()) {
+            //将栈中保存的0,1按顺序输出
+             binString+= binStack.pop();
+        }
+        return "十进制正整数 "+dec+" 转换为二进制数为 "+ binString;
+    }
+   console.log( decToBin(10));
+    console.log( decToBin(100));
+    console.log( decToBin(50));
+
+    // 栈也有一些其他的用处，比如前缀表达式与后缀，中缀表达式的转换；以及函数调用栈
+</script>
+
+</html>

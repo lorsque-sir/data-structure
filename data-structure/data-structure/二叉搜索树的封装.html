@@ -223,7 +223,7 @@
 
 
             BinarySearchTree.prototype.show = function() {
-
+                // 保存根节点
                 let root = this.root;
                 if (root == null) {
                     console.log("EMPTY!")
@@ -240,12 +240,13 @@
                 let res = new Array();
                 for (let i = 0; i < arrayHeight; i++) {
                     for (let j = 0; j < arrayWidth; j++) {
-                        res[i] = new Array(arrayWidth)
+                        // res[i] = new Array(arrayWidth)
+                        res[i] = [arrayWidth];
                     }
-
                 }
-                // let res[][] = new Array();
-                // 对数组进行初始化，默认为一个空格
+                console.log(res)
+                    // let res[][] = new Array();
+                    // 对数组进行初始化，默认为一个空格
                 for (let i = 0; i < arrayHeight; i++) {
                     for (let j = 0; j < arrayWidth; j++) {
                         res[i][j] = " ";
@@ -354,6 +355,9 @@
             })
             // console.log(reKey)
 
+        bst.show();
+        // 创建一棵空树
+        let bst1 = new BinarySearchTree();
         bst.show();
     </script>
 </body>

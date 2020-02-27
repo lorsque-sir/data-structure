@@ -1,5 +1,5 @@
 function StringBuilder() {
-    console.log(this);
+    // console.log(this);
     // this._stringArray = new Array();
     this._stringArray = [];
 }

@@ -199,14 +199,16 @@
                 // 保证输入的树不为空
                 if (currNode == null) return;
                 // 先将当前节点保存到二维数组中
-                res[rowIndex][columnIndex] = currNode; ////////////////
-                // 计算当前位于树的第几层
-                let currLevel = ((rowIndex + 1) / 2);
+                res[rowIndex][columnIndex] = currNode.key; ////////////////
+                // console.log(currNode.key)//存在key值
+                console.log(res[rowIndex][columnIndex])
+                    // 计算当前位于树的第几层
+                let currLevel = parseInt(((rowIndex + 1) / 2)); //转为整数
                 // 若到了最后一层，则返回
                 if (currLevel == treeDepth) return;
                 // 计算当前行到下一行，每个元素之间的间隔（下一行的列索引与当前元素的列索引之间的间隔）
-                let gap = treeDepth - currLevel - 1;
-
+                // let gap = treeDepth - currLevel - 1;
+                let gap = treeDepth - currLevel - 5;
                 // 对左儿子进行判断，若有左儿子，则记录相应的"/"与左儿子的值
                 if (currNode.left != null) {
                     res[rowIndex + 1][columnIndex - gap] = "/";
@@ -216,14 +218,17 @@
                 // 对右儿子进行判断，若有右儿子，则记录相应的"\"与右儿子的值
                 if (currNode.right != null) {
                     res[rowIndex + 1][columnIndex + gap] = "\\";
-                    this.writeArray(currNode.right, rowIndex + 2, columnIndex + gap * 2, res, treeDepth);
+                    // console.log(rowIndex + 1, columnIndex + gap)
+                    this.writeArray(currNode.right, rowIndex + 2, columnIndex + gap * 2, res, treeDepth); //需要将值取整
+
                 }
 
+                return res; //返回装填过后的数组
             }
 
 
             BinarySearchTree.prototype.show = function() {
-
+                // 保存根节点
                 let root = this.root;
                 if (root == null) {
                     console.log("EMPTY!")
@@ -235,15 +240,17 @@
                 // 作为整个二维数组的宽度
                 let arrayHeight = treeDepth * 2 - 1;
                 // let arrayWidth = (2 << (treeDepth - 2)) * 3 + 1;//等效
-                let arrayWidth = Math.pow(2, (treeDepth - 1)) * 3 + 1;
-                // 用一个字符串数组来存储每个位置应显示的元素
+                let arrayWidth = Math.pow(2, (treeDepth - 2)) * 3 + 1;
+                // 用一个数组来存储每个位置应显示的元素
                 let res = new Array();
+                // console.log(arrayWidth) //97
                 for (let i = 0; i < arrayHeight; i++) {
-                    for (let j = 0; j < arrayWidth; j++) {
-                        res[i] = new Array(arrayWidth)
-                    }
-
+                    // for (let j = 0; j < arrayWidth; j++) {
+                    res[i] = new Array(arrayWidth)
+                        // res[i] = [arrayWidth];//这只是将res[i]赋值arraywidth
+                        // }
                 }
+                // console.table(res[0])
                 // let res[][] = new Array();
                 // 对数组进行初始化，默认为一个空格
                 for (let i = 0; i < arrayHeight; i++) {
@@ -251,25 +258,25 @@
                         res[i][j] = " ";
                     }
                 }
-
                 // 从根节点开始，递归处理整个树
-
-                this.writeArray(root, 0, arrayWidth / 2, res, treeDepth);
-
+                this.writeArray(root, 0, parseInt(arrayWidth / 2), res, treeDepth);
+                // console.log(res)
                 // 此时，已经将所有需要显示的元素储存到了二维数组中，将其拼接并打印即可
+                // let sb = [];
+                // 实例化stringbuilder
+                let sb = new StringBuilder();
                 for (let i = 0; i < res.length; i++) {
-                    // let sb = [];
-                    // 实例化stringbuilder
-                    let sb = new StringBuilder();
                     for (let j = 0; j < res[i].length; j++) {
                         // sb.push(res[i][j]);
+                        // console.log(res[i][j])
                         sb.append(res[i][j])
-                        if (res[i][j].length > 1 && i <= res[i].length - 1) {
-                            i += res[i][j].length > 4 ? 2 : res[i][j].length - 1;
-                        }
+                            // if (res[i][j].length > 1 && i <= res[i].length - 1) {
+                            //     i += res[i][j].length > 4 ? 2 : res[i][j].length - 1;
+                            // }
                     }
-                    console.log(sb.toString());
+
                 }
+                console.log(sb.toString());
             }
         }
 
@@ -354,7 +361,19 @@
             })
             // console.log(reKey)
 
-        bst.show();
+        // bst.show();
+        // 创建一棵空树
+        // let bst1 = new BinarySearchTree();
+        // bst1.insert(8, "ad")
+        // bst1.insert(3, "ad")
+        // bst1.insert(10, "ad")
+        // bst1.insert(1, "ad")
+        // bst1.insert(6, "ad")
+        // bst1.insert(14, "ad")
+        // bst1.insert(4, "ad")
+        // bst1.insert(7, "ad")
+        // bst1.insert(13, "ad")
+        // bst1.show();
     </script>
 </body>
 
